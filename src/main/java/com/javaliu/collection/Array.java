@@ -57,15 +57,6 @@ public class Array {
     }
 
     /**
-     * 向数组中添加元素, 默认添加到末尾
-     *
-     * @param e 待添加的元素
-     */
-    public void add(int e) {
-        addLast(e);
-    }
-
-    /**
      * 向数组指定的位置添加元素, 设计思路: 将 index(包含) 之后的元素向后移动一位，先移动末尾的元素。
      *
      * @param index 元素索引
@@ -104,6 +95,40 @@ public class Array {
         add(size, e);
     }
 
+    /**
+     * 移出元素
+     * @param index     待移出元素的索引位置
+     * @return          被移出的元素的值
+     */
+    public int remove(int index) {
+        if (index < 0 || index >= size) {
+            throw new IllegalArgumentException("移出失败，index 非法");
+        }
+
+        int ret = data[index];
+        for (int i = index + 1; i < size; i++) {
+            data[i - 1] = data[i];
+        }
+        size--;
+        return ret;
+    }
+
+    /**
+     * 移出第一个元素
+     * @return      被移出的元素的值
+     */
+    public int removeFirst() {
+        return remove(0);
+    }
+
+    /**
+     * 移出最后一个元素
+     * @return      被移出的元素的值
+     */
+    public int removeLast() {
+        return remove(size - 1);
+    }
+
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
@@ -123,7 +148,7 @@ public class Array {
         Array array = new Array();
 
         for (int i = 0; i < 5; i++) {
-            array.add(i);
+            array.add(i, i);
         }
         System.out.println(array.toString());
         array.addLast(100);
