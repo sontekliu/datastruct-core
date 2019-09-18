@@ -8,4 +8,7 @@ package com.javaliu.collection;
  * 版 本：V1.0.0
  */
 public class Array {
+
+    private int[] data;
+    private int size;
 }
