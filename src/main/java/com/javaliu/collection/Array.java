@@ -20,4 +20,16 @@ public class Array {
     public Array() {
         this(10);
     }
+
+    public int getSize() {
+        return size;
+    }
+
+    public int getCapacity() {
+        return data.length;
+    }
+
+    public boolean isEmpty() {
+        return size == 0;
+    }
 }
