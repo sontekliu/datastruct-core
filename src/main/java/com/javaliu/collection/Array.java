@@ -96,9 +96,10 @@ public class Array {
     }
 
     /**
-     * 移出元素
-     * @param index     待移出元素的索引位置
-     * @return          被移出的元素的值
+     * 移出元素, 只要将 index 后面的元素向前移动一位即可
+     *
+     * @param index 待移出元素的索引位置
+     * @return 被移出的元素的值
      */
     public int remove(int index) {
         if (index < 0 || index >= size) {
@@ -115,7 +116,8 @@ public class Array {
 
     /**
      * 移出第一个元素
-     * @return      被移出的元素的值
+     *
+     * @return 被移出的元素的值
      */
     public int removeFirst() {
         return remove(0);
@@ -123,10 +125,79 @@ public class Array {
 
     /**
      * 移出最后一个元素
-     * @return      被移出的元素的值
+     *
+     * @return 被移出的元素的值
      */
     public int removeLast() {
         return remove(size - 1);
+    }
+
+    /**
+     * 从数组中删除元素 E
+     *
+     * @param e 待删除的元素
+     */
+    public void removeElement(int e) {
+        int index = indexOf(e);
+        if (-1 != index) {
+            remove(index);
+        }
+    }
+
+    /**
+     * 修改指定位置上的元素
+     *
+     * @param index 索引位置
+     * @param e     元素值
+     */
+    public void set(int index, int e) {
+        if (index < 0 || index >= size) {
+            throw new IllegalArgumentException("修改元素失败，index 非法");
+        }
+        data[index] = e;
+    }
+
+    /**
+     * 查找某个元素在数组中的索引, 如果数组中无该元素，返回 -1
+     *
+     * @param e 待查找的元素
+     * @return 索引位置
+     */
+    public int indexOf(int e) {
+        for (int i = 0; i < size; i++) {
+            if (data[i] == e) {
+                return i;
+            }
+        }
+        return -1;
+    }
+
+    /**
+     * 获取某个索引位置的元素
+     *
+     * @param index 索引位置
+     * @return 返回该位置上的元素
+     */
+    public int get(int index) {
+        if (index < 0 || index >= size) {
+            throw new IllegalArgumentException("获取元素失败，index 非法");
+        }
+        return data[index];
+    }
+
+    /**
+     * 数组中是否包含指定的元素，包含返回 true, 否则 false
+     *
+     * @param e 待查询的元素
+     * @return 包含 true, 不包含 false
+     */
+    public boolean contains(int e) {
+        for (int i = 0; i < size; i++) {
+            if (data[i] == e) {
+                return true;
+            }
+        }
+        return false;
     }
 
     @Override
