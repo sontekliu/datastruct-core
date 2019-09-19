@@ -7,9 +7,9 @@ package com.javaliu.collection;
  * 创 建：2019年09月18日 10:56:00
  * 版 本：V1.0.0
  */
-public class Array {
+public class Array<E> {
 
-    private int[] data;
+    private E[] data;
     private int size;
 
     /**
@@ -18,7 +18,7 @@ public class Array {
      * @param capacity 初始化时的容量
      */
     public Array(int capacity) {
-        data = new int[capacity];
+        data = (E[])new Object[capacity];
         size = 0;
     }
 
@@ -62,7 +62,7 @@ public class Array {
      * @param index 元素索引
      * @param e     待添加的元素
      */
-    public void add(int index, int e) {
+    public void add(int index, E e) {
         if (index < 0 || index > size) {
             throw new IllegalArgumentException("参数不合法");
         }
@@ -82,7 +82,7 @@ public class Array {
      *
      * @param e 待插入的元素
      */
-    public void addFirst(int e) {
+    public void addFirst(E e) {
         add(0, e);
     }
 
@@ -91,7 +91,7 @@ public class Array {
      *
      * @param e
      */
-    public void addLast(int e) {
+    public void addLast(E e) {
         add(size, e);
     }
 
@@ -101,12 +101,12 @@ public class Array {
      * @param index 待移出元素的索引位置
      * @return 被移出的元素的值
      */
-    public int remove(int index) {
+    public E remove(int index) {
         if (index < 0 || index >= size) {
             throw new IllegalArgumentException("移出失败，index 非法");
         }
 
-        int ret = data[index];
+        E ret = data[index];
         for (int i = index + 1; i < size; i++) {
             data[i - 1] = data[i];
         }
@@ -119,7 +119,7 @@ public class Array {
      *
      * @return 被移出的元素的值
      */
-    public int removeFirst() {
+    public E removeFirst() {
         return remove(0);
     }
 
@@ -128,16 +128,16 @@ public class Array {
      *
      * @return 被移出的元素的值
      */
-    public int removeLast() {
+    public E removeLast() {
         return remove(size - 1);
     }
 
     /**
-     * 从数组中删除元素 E
+     * 移出数组中第一个元素E
      *
      * @param e 待删除的元素
      */
-    public void removeElement(int e) {
+    public void removeElement(E e) {
         int index = indexOf(e);
         if (-1 != index) {
             remove(index);
@@ -150,7 +150,7 @@ public class Array {
      * @param index 索引位置
      * @param e     元素值
      */
-    public void set(int index, int e) {
+    public void set(int index, E e) {
         if (index < 0 || index >= size) {
             throw new IllegalArgumentException("修改元素失败，index 非法");
         }
@@ -158,14 +158,14 @@ public class Array {
     }
 
     /**
-     * 查找某个元素在数组中的索引, 如果数组中无该元素，返回 -1
+     * 查找某个元素在数组中第一次出现的索引, 如果数组中无该元素，返回 -1
      *
      * @param e 待查找的元素
      * @return 索引位置
      */
-    public int indexOf(int e) {
+    public int indexOf(E e) {
         for (int i = 0; i < size; i++) {
-            if (data[i] == e) {
+            if (data[i].equals(e)) {
                 return i;
             }
         }
@@ -178,7 +178,7 @@ public class Array {
      * @param index 索引位置
      * @return 返回该位置上的元素
      */
-    public int get(int index) {
+    public E get(int index) {
         if (index < 0 || index >= size) {
             throw new IllegalArgumentException("获取元素失败，index 非法");
         }
@@ -191,9 +191,9 @@ public class Array {
      * @param e 待查询的元素
      * @return 包含 true, 不包含 false
      */
-    public boolean contains(int e) {
+    public boolean contains(E e) {
         for (int i = 0; i < size; i++) {
-            if (data[i] == e) {
+            if (data[i].equals(e)) {
                 return true;
             }
         }
