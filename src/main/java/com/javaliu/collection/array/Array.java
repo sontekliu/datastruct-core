@@ -1,4 +1,4 @@
-package com.javaliu.collection;
+package com.javaliu.collection.array;
 
 /**
  * 描 述：数组
