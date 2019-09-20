@@ -18,7 +18,7 @@ public class Array<E> {
      * @param capacity 初始化时的容量
      */
     public Array(int capacity) {
-        data = (E[])new Object[capacity];
+        data = (E[]) new Object[capacity];
         size = 0;
     }
 
@@ -68,7 +68,7 @@ public class Array<E> {
         }
 
         if (size == data.length) {
-            throw new IllegalArgumentException("添加失败，数组已满");
+            resize(2 * size);
         }
         for (int i = size; i >= index; i--) {
             data[i + 1] = data[i];
@@ -111,6 +111,10 @@ public class Array<E> {
             data[i - 1] = data[i];
         }
         size--;
+        data[size] = null;  // loitering objects != memory leak 闲荡的对象 != 内存溢出
+        if (size == data.length / 4 && data.length / 2 != 0) {
+            resize(data.length / 2);
+        }
         return ret;
     }
 
@@ -198,6 +202,20 @@ public class Array<E> {
             }
         }
         return false;
+    }
+
+    /**
+     * 扩容
+     *
+     * @param newCapacity 扩容之后的大小
+     */
+    private void resize(int newCapacity) {
+        E[] newData = (E[]) new Object[newCapacity];
+
+        for (int i = 0; i < size; i++) {
+            newData[i] = data[i];
+        }
+        data = newData;
     }
 
     @Override
